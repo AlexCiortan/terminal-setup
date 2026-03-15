@@ -1,0 +1,24 @@
+# Ghostty Terminal Configuration
+# https://mitchellh.com/ghostty
+
+# Theme and Appearance
+theme = dark+
+font-family = "JetBrains Mono"
+font-size = 14
+background-opacity = 0.9
+background-blur-radius = 20
+
+# macOS Integration
+macos-titlebar-style = native
+window-save-state = always
+mouse-hide-while-typing = true
+window-decoration = true
+macos-option-as-alt = true
+
+# Performance
+shell-integration = detect
+shell-integration-features = sudo,title
+
+# Cursor
+cursor-style = block
+cursor-style-blink = true

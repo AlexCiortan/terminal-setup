@@ -1,0 +1,80 @@
+# Starship prompt configuration for AI/Platform Architecture work
+
+format = """
+[┌─](bold green)$username$hostname$directory$git_branch$git_status$python$nodejs$aws
+[└─](bold green)$character"""
+
+right_format = """$cmd_duration"""
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+style = "bold cyan"
+format = "[$path]($style)[$read_only]($read_only_style) "
+
+[git_branch]
+symbol = " "
+format = "on [$symbol$branch]($style) "
+style = "bold purple"
+
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = "bold yellow"
+conflicted = "⚔️"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+untracked = "?${count}"
+stashed = "$${count}"
+modified = "!${count}"
+staged = "+${count}"
+renamed = "»${count}"
+deleted = "✘${count}"
+
+[python]
+symbol = " "
+format = 'via [$symbol$version]($style) '
+style = "yellow"
+detect_extensions = ["py"]
+detect_files = ["requirements.txt", "pyproject.toml", ".python-version"]
+
+[nodejs]
+symbol = " "
+format = 'via [$symbol$version]($style) '
+style = "green"
+detect_files = ["package.json", ".node-version", ".nvmrc"]
+
+[aws]
+symbol = "☁️  "
+format = 'on [$symbol($profile )(\($region\) )]($style)'
+style = "bold yellow"
+
+[cmd_duration]
+min_time = 500
+format = "took [$duration]($style)"
+style = "bold yellow"
+
+[username]
+style_user = "bold dimmed green"
+show_always = false
+format = "[$user]($style)@"
+
+[hostname]
+ssh_only = true
+format = "[$hostname](bold dimmed blue) in "
+disabled = false
+
+[terraform]
+symbol = "💠 "
+format = "via [$symbol$version]($style) "
+style = "bold purple"
+
+[kubernetes]
+symbol = "☸️  "
+format = '[$symbol$context( \($namespace\))]($style) '
+style = "cyan bold"
+disabled = false

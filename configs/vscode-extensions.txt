@@ -1,0 +1,39 @@
+# VS Code Extensions for AI/ML Development
+# Installed automatically during setup
+
+# Claude AI - CRITICAL
+anthropics.claude-code
+andrepimenta.claude-code-chat
+
+# Python Development - CRITICAL
+ms-python.python
+ms-python.vscode-pylance
+ms-toolsai.jupyter
+charliermarsh.ruff
+ms-python.black-formatter
+
+# Git & GitHub - ESSENTIAL
+eamodio.gitlens
+github.vscode-pull-request-github
+github.vscode-github-actions
+
+# Docker & Containers - ESSENTIAL
+ms-azuretools.vscode-docker
+ms-vscode-remote.remote-containers
+
+# Languages & Formats
+redhat.vscode-yaml
+
+# Productivity
+christian-kohler.path-intellisense
+usernamehw.errorlens
+aaron-bond.better-comments
+
+# UI & Themes
+pkief.material-icon-theme
+akamud.vscode-theme-onedark
+
+# Additional Tools
+github.copilot-chat
+gitlab.gitlab-workflow
+vscodevim.vim

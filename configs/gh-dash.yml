@@ -1,0 +1,139 @@
+# gh-dash configuration
+# Customized for AI development workflows
+
+prSections:
+  - title: My Pull Requests
+    filters: is:open author:@me
+    limit: 20
+
+  - title: Needs My Review
+    filters: is:open review-requested:@me
+    limit: 20
+
+  - title: Involved
+    filters: is:open involves:@me -author:@me
+    limit: 20
+
+  - title: Recently Merged
+    filters: is:merged updated:>7
+    limit: 10
+
+issuesSections:
+  - title: My Issues
+    filters: is:open author:@me
+    limit: 20
+
+  - title: Assigned to Me
+    filters: is:open assignee:@me
+    limit: 20
+
+  - title: Mentions
+    filters: is:open mentions:@me
+    limit: 20
+
+defaults:
+  preview:
+    open: true
+    width: 60
+
+  prsLimit: 20
+  issuesLimit: 20
+
+  view: prs
+
+  layout:
+    prs:
+      updatedAt:
+        width: 8
+      state:
+        hidden: true
+      repo:
+        width: 15
+      author:
+        width: 12
+      title:
+        grow: true
+        width: 50
+      reviewStatus:
+        width: 14
+
+    issues:
+      updatedAt:
+        width: 8
+      state:
+        hidden: true
+      repo:
+        width: 15
+      creator:
+        width: 12
+      title:
+        grow: true
+        width: 50
+
+keybindings:
+  universal:
+    - key: g
+      command: >
+        tmux new-window -c {{.RepoPath}} 'lazygit'
+      description: Open lazygit in repo directory
+
+  prs:
+    - key: c
+      builtin: checkout
+    - key: d
+      builtin: diff
+    - key: o
+      builtin: open
+    - key: r
+      builtin: refresh
+    - key: C
+      builtin: comment
+    - key: A
+      builtin: approve
+    - key: R
+      builtin: requestChanges
+
+  issues:
+    - key: o
+      builtin: open
+    - key: r
+      builtin: refresh
+    - key: C
+      builtin: comment
+
+theme:
+  ui:
+    sectionsShowCount: true
+    table:
+      compact: true
+      showSeparator: true
+
+  colors:
+    text:
+      primary: "#E0DEF4"
+      secondary: "#908CAA"
+      inverted: "#191724"
+      faint: "#6E6A86"
+      warning: "#F6C177"
+      success: "#9CCFD8"
+
+    background:
+      selected: "#26233A"
+
+    border:
+      primary: "#908CAA"
+      secondary: "#6E6A86"
+      faint: "#403D52"
+
+pager:
+  diff: "delta"
+
+confirmQuit: false
+
+repoPaths:
+  # Add your frequently used repo paths here
+  # Example:
+  # myorg/*: ~/code/myorg/{{.RepoName}}
+  # personal/*: ~/projects/{{.RepoName}}
+
+refetchIntervalMinutes: 30

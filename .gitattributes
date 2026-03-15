@@ -1,0 +1,14 @@
+# Ensure shell scripts always have LF line endings
+*.sh text eol=lf
+
+# Ensure config files have LF line endings
+*.conf text eol=lf
+*.toml text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Markdown and documentation
+*.md text eol=lf
+
+# Ensure all text files are normalized
+* text=auto eol=lf

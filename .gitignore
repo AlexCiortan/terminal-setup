@@ -1,0 +1,66 @@
+# Terminal Setup - Git Ignore
+
+# Backup files
+*.backup
+*.backup.*
+*.bak
+*~
+*.old
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Thumbnails
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Test files
+test_*
+*.test
+
+# Logs
+*.log
+logs/
+
+# Private notes or configs
+PRIVATE.md
+private/
+secrets/
+.env
+.envrc
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Claude Code
+.claude/
+
+# OS generated
+Thumbs.db
+
+# Don't ignore these directories
+!configs/
+!docs/

@@ -1,0 +1,120 @@
+name: Validate
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate-scripts:
+    name: Validate Shell Scripts
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Check shell script syntax
+      run: |
+        echo "🔍 Validating shell scripts..."
+        for script in *.sh scripts/*.sh; do
+          if [ -f "$script" ]; then
+            echo "Checking $script..."
+            bash -n "$script"
+          fi
+        done
+
+    - name: Run validate.sh
+      run: |
+        chmod +x scripts/validate.sh
+        ./scripts/validate.sh
+
+    - name: Check for placeholder text
+      run: |
+        echo "🔍 Checking for placeholder text..."
+        if grep -r "YOUR_USERNAME\|TODO\|FIXME" . --exclude-dir=.git --exclude="*.yml" --exclude="CHANGELOG.md"; then
+          echo "❌ Found placeholder text"
+          exit 1
+        fi
+        echo "✅ No placeholders found"
+
+    - name: Check file permissions
+      run: |
+        echo "🔍 Checking file permissions..."
+        for script in *.sh scripts/*.sh; do
+          if [ -f "$script" ] && [ ! -x "$script" ]; then
+            echo "❌ $script is not executable"
+            exit 1
+          fi
+        done
+        echo "✅ All scripts are executable"
+
+  markdown-lint:
+    name: Lint Markdown
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Lint Markdown files
+      uses: DavidAnson/markdownlint-cli2-action@v15
+      with:
+        globs: '**/*.md'
+        config: |
+          {
+            "default": true,
+            "MD013": false,
+            "MD033": false,
+            "MD041": false
+          }
+
+  check-configs:
+    name: Validate Config Files
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Check YAML syntax
+      run: |
+        echo "🔍 Validating YAML files..."
+        for file in $(find . -name "*.yml" -o -name "*.yaml"); do
+          echo "Checking $file..."
+          python3 -c "import yaml; yaml.safe_load(open('$file'))"
+        done
+
+    - name: Check TOML syntax
+      run: |
+        echo "🔍 Validating TOML files..."
+        pip install toml
+        for file in $(find . -name "*.toml"); do
+          echo "Checking $file..."
+          python3 -c "import toml; toml.load('$file')"
+        done
+
+    - name: Verify all documented files exist
+      run: |
+        echo "🔍 Checking that documented files exist..."
+        test -f install.sh
+        test -f install-ai-tools.sh
+        test -f scripts/uninstall.sh
+        test -f scripts/validate.sh
+        test -f configs/zshrc
+        test -f configs/tmux.conf
+        test -f configs/starship.toml
+        test -f configs/ghostty
+        test -f configs/gh-dash.yml
+        test -f configs/aerospace.toml
+        test -f docs/QUICKSTART.md
+        test -f docs/REFERENCE.md
+        test -f docs/ADVANCED.md
+        test -f docs/RECOMMENDED_ADDITIONS.md
+        test -f docs/TEST_ON_OLD_COMPUTER.md
+        test -f README.md
+        test -f LICENSE
+        test -f CHANGELOG.md
+        test -f VERSION
+        echo "✅ All documented files exist"
